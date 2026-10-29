@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: aa-check-backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/aacheck
+    username: aacheck
+    password: aacheck123
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 12MB
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    # 生产环境请通过环境变量覆盖
+    secret: change-me-in-production-0123456789abcdef0123456789abcdef
+    expire-days: 30
+  upload-dir: ./uploads
+  image-url-prefix: /images

@@ -1,0 +1,75 @@
+# =====================
+# Gradle / common
+# =====================
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Local Gradle properties (e.g. JVM args, signing)
+gradle.properties
+
+# =====================
+# Android
+# =====================
+*.iml
+*.apk
+*.aar
+*.ap_
+*.aab
+*.dex
+*.class
+bin/
+gen/
+out/
+release/
+captures/
+.externalNativeBuild/
+.cxx/
+local.properties
+proguard/
+*.log
+
+# Android Studio / IntelliJ
+.idea/
+*.ipr
+*.iws
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+
+# Keystore / signing
+*.jks
+*.keystore
+keystore.properties
+
+# =====================
+# Backend (Spring Boot / Kotlin)
+# =====================
+uploads/
+*.log
+application-local.yml
+application-local.properties
+.env
+
+# =====================
+# OS / Editor
+# =====================
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~
+
+# =====================
+# Misc / temp
+# =====================
+*.tmp
+*.bak
+.cache/
+.vscode/

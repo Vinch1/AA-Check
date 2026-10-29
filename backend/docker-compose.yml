@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: docker.m.daocloud.io/library/postgres:16-alpine
+    container_name: aacheck-postgres
+    environment:
+      POSTGRES_DB: aacheck
+      POSTGRES_USER: aacheck
+      POSTGRES_PASSWORD: aacheck123
+    ports:
+      - "5432:5432"
+    volumes:
+      - aacheck-pgdata:/var/lib/postgresql/data
+
+volumes:
+  aacheck-pgdata:
