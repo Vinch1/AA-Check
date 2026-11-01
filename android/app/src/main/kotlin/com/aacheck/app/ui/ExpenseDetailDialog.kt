@@ -3,6 +3,7 @@ package com.aacheck.app.ui
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -15,6 +16,7 @@ import com.aacheck.app.data.ExpenseView
 import com.aacheck.app.data.MemberBrief
 import com.aacheck.app.util.Category
 import com.aacheck.app.util.centsToYuan
+import com.aacheck.app.util.tint
 import com.aacheck.app.util.formatTime
 
 @Composable
@@ -32,13 +34,14 @@ fun ExpenseDetailDialog(
     val cat = Category.fromKey(expense.category)
     val isAuthor = expense.authorId == currentUserId
     val openEdit = expense.openEdit
+    val isDark = isSystemInDarkTheme()
 
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text("记录详情") },
         text = {
             Column(Modifier.verticalScroll(rememberScrollState())) {
-                Text("${cat.emoji} ${cat.label}", color = cat.color, fontWeight = FontWeight.Bold)
+                Text("${cat.emoji} ${cat.label}", color = cat.tint(isDark), fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
                 Text("金额：${centsToYuan(expense.amountCents)}", style = MaterialTheme.typography.titleMedium)
                 Text("付款人：${nameOf[expense.payerId] ?: "?"}")
@@ -64,7 +67,7 @@ fun ExpenseDetailDialog(
                     when (openEdit.status) {
                         "PENDING" -> {
                             if (isAuthor) Text("有修改待你确认", color = MaterialTheme.colorScheme.primary)
-                            else Text("修改待作者确认", color = MaterialTheme.colorScheme.outline)
+                            else Text("修改待作者确认", color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         "DISPUTED" -> Text("该记录有争议，请与修改人线下沟通", color = MaterialTheme.colorScheme.error)
                     }

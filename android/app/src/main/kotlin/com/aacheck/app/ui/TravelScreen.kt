@@ -179,7 +179,7 @@ private fun MembersTab(travel: com.aacheck.app.data.TravelDto?, members: List<Me
             Card {
                 Column(Modifier.padding(16.dp)) {
                     Text("邀请码：${travel.inviteCode}", style = MaterialTheme.typography.titleMedium)
-                    Text("状态：${if (isEnded) "已结束" else "进行中"}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline)
+                    Text("状态：${if (isEnded) "已结束" else "进行中"}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }

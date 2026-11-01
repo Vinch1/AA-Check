@@ -29,13 +29,13 @@ fun ApprovalDialog(
         title = { Text("有人改了你的记录") },
         text = {
             Column(Modifier.verticalScroll(rememberScrollState())) {
-                Text("编辑人：${nameOf[approval.editorId] ?: "?"}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline)
+                Text("编辑人：${nameOf[approval.editorId] ?: "?"}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(12.dp))
                 SnapshotRow("原始", approval.before, nameOf)
                 Spacer(Modifier.height(8.dp))
                 SnapshotRow("修改后", approval.after, nameOf, highlight = true)
                 Spacer(Modifier.height(8.dp))
-                Text("不同意请与修改人线下沟通，修改人可撤回恢复原状。", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline)
+                Text("不同意请与修改人线下沟通，修改人可撤回恢复原状。", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
         },
         confirmButton = { TextButton(onClick = onAgree) { Text("同意") } },

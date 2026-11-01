@@ -171,7 +171,7 @@ fun ExpenseFormSheet(
                 modifier = Modifier.fillMaxWidth(),
             )
             if (!canEditNote) {
-                Text("备注只有作者本人可修改", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.outline)
+                Text("备注只有作者本人可修改", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
 
             // 图片

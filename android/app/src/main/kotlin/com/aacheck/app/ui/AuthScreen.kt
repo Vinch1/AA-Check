@@ -34,7 +34,7 @@ fun AuthScreen(vm: AuthViewModel, onDone: () -> Unit) {
         Text(
             if (isLogin) "和朋友们一起记账" else "创建你的账号",
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.outline,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.height(40.dp))
 

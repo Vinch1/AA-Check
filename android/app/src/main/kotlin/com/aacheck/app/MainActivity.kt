@@ -19,14 +19,16 @@ import com.aacheck.app.ui.HomeScreen
 import com.aacheck.app.ui.HomeViewModel
 import com.aacheck.app.ui.TravelScreen
 import com.aacheck.app.ui.TravelViewModel
-import com.aacheck.app.ui.theme.AaCheckTheme
+import com.aacheck.app.ui.theme.AaCheckAppTheme
+import com.aacheck.app.ui.theme.rememberThemeController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val container = (application as AaCheckApp).container
         setContent {
-            AaCheckTheme { AppRoot(container) }
+            val controller = rememberThemeController(container.tokenStore)
+            AaCheckAppTheme(controller = controller) { AppRoot(container) }
         }
     }
 }

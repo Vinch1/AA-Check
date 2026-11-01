@@ -33,16 +33,20 @@ enum class Category(
     val label: String,
     val emoji: String,
     val color: Color,
+    val darkColor: Color,
 ) {
-    FOOD("FOOD", "餐饮", "🍜", Color(0xFFE5734A)),
-    TRANSPORT("TRANSPORT", "交通", "🚗", Color(0xFF3A8FDE)),
-    TICKET("TICKET", "门票", "🎫", Color(0xFF9A6BD6)),
-    HOTEL("HOTEL", "住宿", "🏨", Color(0xFF5C9E8C)),
-    SHOPPING("SHOPPING", "购物", "🛍️", Color(0xFFE39A2B)),
-    ENTERTAINMENT("ENTERTAINMENT", "娱乐", "🎮", Color(0xFFD9538F)),
-    OTHER("OTHER", "其他", "📦", Color(0xFF8A8A8A));
+    FOOD("FOOD", "餐饮", "🍜", Color(0xFFB5482E), Color(0xFFE8926B)),
+    TRANSPORT("TRANSPORT", "交通", "🚗", Color(0xFF8A6D3B), Color(0xFFD9B36A)),
+    TICKET("TICKET", "门票", "🎫", Color(0xFFA8651F), Color(0xFFE59A4E)),
+    HOTEL("HOTEL", "住宿", "🏨", Color(0xFF7A6A4F), Color(0xFFCBB890)),
+    SHOPPING("SHOPPING", "购物", "🛍️", Color(0xFFC08A3E), Color(0xFFE6B86A)),
+    ENTERTAINMENT("ENTERTAINMENT", "娱乐", "🎮", Color(0xFF9A4F6B), Color(0xFFE08AA6)),
+    OTHER("OTHER", "其他", "📦", Color(0xFF8A7B68), Color(0xFFC2B49C));
 
     companion object {
         fun fromKey(key: String): Category = entries.firstOrNull { it.key == key } ?: OTHER
     }
 }
+
+/** Pick the category tint that stays legible on the current surface. */
+fun Category.tint(isDark: Boolean): Color = if (isDark) darkColor else color

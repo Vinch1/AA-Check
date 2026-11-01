@@ -5,6 +5,7 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,6 +17,7 @@ import com.aacheck.app.data.ExpenseView
 import com.aacheck.app.data.MemberBrief
 import com.aacheck.app.util.Category
 import com.aacheck.app.util.centsToYuan
+import com.aacheck.app.util.tint
 import com.aacheck.app.util.dayKey
 import com.aacheck.app.util.formatDay
 import com.aacheck.app.util.formatTime
@@ -47,7 +49,7 @@ fun TimelineTab(
                     Text(
                         formatDay(list.first().createdAt),
                         style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.outline,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
             }
@@ -85,6 +87,7 @@ private fun FilterRow(
 @Composable
 private fun ExpenseCard(e: ExpenseView, onClick: (Long) -> Unit) {
     val cat = Category.fromKey(e.category)
+    val isDark = isSystemInDarkTheme()
     Card(Modifier.fillMaxWidth().padding(vertical = 4.dp).clickable { onClick(e.id) }) {
         Column(Modifier.padding(12.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -93,13 +96,13 @@ private fun ExpenseCard(e: ExpenseView, onClick: (Long) -> Unit) {
                 Text(
                     cat.label,
                     style = MaterialTheme.typography.labelMedium,
-                    color = cat.color,
+                    color = cat.tint(isDark),
                 )
                 Spacer(Modifier.width(8.dp))
                 Text(
                     formatTime(e.createdAt),
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.outline,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Spacer(Modifier.weight(1f))
                 Text(centsToYuan(e.amountCents), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)

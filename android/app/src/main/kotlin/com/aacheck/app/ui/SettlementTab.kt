@@ -63,7 +63,7 @@ fun SettlementTab(
             Card {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                     Text(nameOf[t.fromUserId] ?: "?", fontWeight = FontWeight.Bold)
-                    Text("  →  ", color = MaterialTheme.colorScheme.outline)
+                    Text("  →  ", color = MaterialTheme.colorScheme.onSurfaceVariant)
                     Text(nameOf[t.toUserId] ?: "?", fontWeight = FontWeight.Bold)
                     Spacer(Modifier.weight(1f))
                     Text(centsToYuan(t.amountCents), fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)

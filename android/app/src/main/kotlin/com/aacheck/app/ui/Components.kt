@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 private val avatarPalette = listOf(
-    Color(0xFFE5734A), Color(0xFF5C9E8C), Color(0xFF3A8FDE), Color(0xFF9A6BD6),
-    Color(0xFFE39A2B), Color(0xFFD9538F), Color(0xFF4DB6AC), Color(0xFF7986CB),
+    Color(0xFF9C4A28), Color(0xFFB5895A), Color(0xFF7C6A4F), Color(0xFFC08457),
+    Color(0xFF8A6F4E), Color(0xFFA86B3C), Color(0xFF6E5E4D), Color(0xFFBE9A6B),
 )
 
 @Composable
@@ -39,6 +39,6 @@ fun Avatar(name: String, size: Dp = 36.dp) {
 @Composable
 fun EmptyHint(text: String) {
     Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-        Text(text = text, color = MaterialTheme.colorScheme.outline, fontSize = 14.sp)
+        Text(text = text, color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 14.sp)
     }
 }

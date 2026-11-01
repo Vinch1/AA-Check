@@ -2,9 +2,10 @@ spring:
   application:
     name: aa-check-backend
   datasource:
-    url: jdbc:postgresql://localhost:5432/aacheck
-    username: aacheck
-    password: aacheck123
+    # 本地默认值；生产用环境变量覆盖
+    url: ${DATASOURCE_URL:${DATABASE_URL:jdbc:postgresql://localhost:5432/aacheck}}
+    username: ${DATASOURCE_USERNAME:aacheck}
+    password: ${DATASOURCE_PASSWORD:aacheck123}
   jpa:
     hibernate:
       ddl-auto: update
@@ -18,12 +19,22 @@ spring:
       static-locations: classpath:/static/
 
 server:
-  port: 8080
+  # 生产用环境变量 PORT 注入监听端口
+  port: ${PORT:8080}
+  address: 0.0.0.0
 
 app:
   jwt:
-    # 生产环境请通过环境变量覆盖
-    secret: change-me-in-production-0123456789abcdef0123456789abcdef
+    # 生产环境务必通过环境变量 JWT_SECRET 覆盖
+    secret: ${JWT_SECRET:change-me-in-production-0123456789abcdef0123456789abcdef}
     expire-days: 30
-  upload-dir: ./uploads
-  image-url-prefix: /images
+  # 生产指向挂载卷（推荐 /data/uploads）
+  upload-dir: ${UPLOAD_DIR:./uploads}
+  # 用本地磁盘时为 /images；若改用 R2/Supabase Storage 设成完整 URL
+  image-url-prefix: ${IMAGE_URL_PREFIX:/images}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
