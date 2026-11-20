@@ -169,4 +169,9 @@ class TravelViewModel(
 
     private fun friendly(e: Throwable): String = e.toUserMessage()
     fun clearError() { _state.value = _state.value.copy(error = null) }
+
+    override fun onCleared() {
+        wsClient.disconnect()
+        super.onCleared()
+    }
 }

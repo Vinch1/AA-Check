@@ -7,7 +7,8 @@
 ```
 AA-Check/
 ├── backend/     Kotlin + Spring Boot 3 + PostgreSQL 后端
-└── android/     Kotlin + Jetpack Compose Android 客户端
+├── android/     Kotlin + Jetpack Compose Android 客户端
+└── ios/         Swift + SwiftUI iOS 客户端（Android 移植版，见 docs/planning/）
 ```
 
 ## 一、启动后端
