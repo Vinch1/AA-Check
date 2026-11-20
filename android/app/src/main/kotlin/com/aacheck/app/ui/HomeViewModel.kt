@@ -44,7 +44,7 @@ class HomeViewModel(private val repo: Repository) : ViewModel() {
         }
     }
 
-    fun logout() { repo.logout() }
+    fun logout(): Boolean = repo.logout()
 
     private fun friendly(e: Throwable): String = e.toUserMessage()
     fun clearError() { _state.value = _state.value.copy(error = null) }

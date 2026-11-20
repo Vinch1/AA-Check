@@ -1,18 +1,18 @@
 package com.aacheck.app
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.aacheck.app.core.TokenStore
 import com.aacheck.app.ui.AuthScreen
 import com.aacheck.app.ui.AuthViewModel
 import com.aacheck.app.ui.HomeScreen
@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppRoot(container: com.aacheck.app.core.AppContainer) {
     val nav = rememberNavController()
+    val context = LocalContext.current
     val start = if (container.tokenStore.isLoggedIn()) "home" else "auth"
 
     NavHost(navController = nav, startDestination = start) {
@@ -50,7 +51,14 @@ fun AppRoot(container: com.aacheck.app.core.AppContainer) {
             HomeScreen(
                 vm = vm,
                 onOpenTravel = { id -> nav.navigate("travel/$id") },
-                onLogout = { container.tokenStore.clear(); nav.navigate("auth") { popUpTo(0) } },
+                onLogout = {
+                    if (vm.logout()) {
+                        container.wsClient.disconnect()
+                        nav.navigate("auth") { popUpTo(0) }
+                    } else {
+                        Toast.makeText(context, "退出登录失败，请重试", Toast.LENGTH_SHORT).show()
+                    }
+                },
             )
         }
         composable(

@@ -7,6 +7,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.io.IOException
 
 class Repository(
     private val api: ApiService,
@@ -16,19 +17,21 @@ class Repository(
     // ---------- 认证 ----------
     suspend fun login(phone: String, password: String): AuthResponse {
         val r = api.login(LoginRequest(phone, password))
-        tokenStore.token = r.token
-        tokenStore.user = r.user
+        if (!tokenStore.saveAuth(r.token, r.user)) {
+            throw IOException("无法保存登录状态，请重试")
+        }
         return r
     }
 
     suspend fun register(phone: String, password: String, nickname: String?): AuthResponse {
         val r = api.register(RegisterRequest(phone, password, nickname))
-        tokenStore.token = r.token
-        tokenStore.user = r.user
+        if (!tokenStore.saveAuth(r.token, r.user)) {
+            throw IOException("无法保存登录状态，请重试")
+        }
         return r
     }
 
-    fun logout() = tokenStore.clear()
+    fun logout(): Boolean = tokenStore.clear()
 
     // ---------- 旅行 ----------
     suspend fun myTravels(): List<TravelDto> = api.myTravels()
